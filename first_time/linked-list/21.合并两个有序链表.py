@@ -34,17 +34,17 @@ class Solution:
         merged_list.extend(l_max[max_l_index:])
         return merged_list
 
-class Solution:
-    def mergeTwoLists(self, l1, l2):
-        mergeed_list = []
-        if l1.val < l2.val:
-            mergeed_list.append(l1.val)
-        else:
-            mergeed_list.append(l2.val)
-        if l1.next is None and l2.next is None:
-            return mergeed_list
-        elif l1.next is None and l2.next is not None:
-            return 
+# class Solution:
+#     def mergeTwoLists(self, l1, l2):
+#         mergeed_list = []
+#         if l1.val < l2.val:
+#             mergeed_list.append(l1.val)
+#         else:
+#             mergeed_list.append(l2.val)
+#         if l1.next is None and l2.next is None:
+#             return mergeed_list
+#         elif l1.next is None and l2.next is not None:
+#             return 
 # @lc code=end
 
 solution = Solution()
