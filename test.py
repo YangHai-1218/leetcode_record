@@ -4,17 +4,17 @@
 
 
 class Solution:
-    def rotate_martix(self, martix):
-        if not martix:
+    def rotate_martix(self, matrix):
+        if not matrix:
             return []
         result = []
-        num_row = len(martix)
+        num_row = len(matrix)
         for i in range(num_row):
-            col = [martix[j][i] for j in range(num_row-1, -1, -1)]
+            col = [matrix[j][i] for j in range(num_row-1, -1, -1)]
             result.append(col)
         return result
-    def rotate_martix_inplace(self, martix):
-        if not martix:
+    def rotate_martix_inplace(self, matrix):
+        if not matrix:
             return []
 
 class Solution2:
@@ -36,6 +36,8 @@ class Solution2:
                 result += 1
                 start_index += 1
         return result
+
+
 
 if __name__ =='__main__':
     # martix = [[1,2],[3,4]]
