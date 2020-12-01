@@ -1,49 +1,47 @@
 
 
+
+
+
 class Solution:
-    def get_depth(self, root):
-        stack = []
-        stack.append(root)
-        depth = 0
-        while stack:
-            append_flag = False
-            currrent_node = stack.pop()
-            depth += 1
-            left_node, right_node = currrent_node.left, currrent_node.right
-            if left_node is not None:
-                stack.append(left_node)
-                append_flag = True
-            if right_node is not None and append_flag is False:
-                stack.append(right_node)
-        return depth
+    def rotate_martix(self, martix):
+        if not martix:
+            return []
+        result = []
+        num_row = len(martix)
+        for i in range(num_row):
+            col = [martix[j][i] for j in range(num_row-1, -1, -1)]
+            result.append(col)
+        return result
+    def rotate_martix_inplace(self, martix):
+        if not martix:
+            return []
 
-class TreeNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+class Solution2:
+    def carry_people(self, people, limit):
+        people.sort()
+        num_ = len(people)
+        start_index = 0
+        end_index = num_ - 1
+        result = 0
+        # people.insert(num_, 0)
+        while start_index < end_index:
+            current_weigth = people[start_index]
+            min_weight = people[end_index]
+            if current_weigth + min_weight <= limit:
+                result += 1
+                start_index += 1
+                end_index -= 1
+            else:
+                result += 1
+                start_index += 1
+        return result
 
-# class Solution:
-#     def get_depth(self, root):
-#         if root is None:
-#             return 0
-#         queue = [root]
-#         depth = 0
-#         while queue:
-#             depth += 1
-#             current_level_size = len(queue)
-#             for _ in range(current_level_size):
-#                 current_node = queue.pop(0)
-#                 if current_node.left is not None:
-#                     queue.append(current_node.left)
-#                 if current_node.right is not None:
-#                     queue.append(current_node.right)
-#         return depth
-
-
-root = TreeNode(10)
-depth_1 = TreeNode(20)
-depth_2 = TreeNode(30)
-root.left, root.right = depth_1, None
-sol = Solution()
-print(sol.get_depth(root))       
+if __name__ =='__main__':
+    # martix = [[1,2],[3,4]]
+    # sol = Solution()
+    # print(sol.rotate_martix(martix))
+    people = [1,2,3,4]
+    limit = 5
+    sol = Solution2()
+    print(sol.carry_people(people, limit))
