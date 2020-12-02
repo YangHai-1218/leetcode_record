@@ -7,8 +7,10 @@
 # @lc code=start
 class Solution:
     def solveNQueens(self, n):
-        self.n = n
-    def _solveNQuees(self, level, result):
-        for n in
+        
+
+
+            
+
 # @lc code=end
 
