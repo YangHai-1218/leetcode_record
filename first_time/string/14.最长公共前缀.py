@@ -21,6 +21,21 @@ class Solution:
             else:
                 return same_str
         return same_str
+
+class Solution:
+    def longestCommonPrefix(self, strs):
+        if not strs:
+            return ""
+        i = 0
+        len_ = min([len(s) for s in strs])
+        if len_ == 0:
+            return ""
+
+        for i in range(len_):
+            temp = set([s[i] for s in strs])
+            if len(temp) != 1:
+                return strs[0][:i]
+        return strs[0][:i+1]
 # @lc code=end
 
 solution = Solution()
