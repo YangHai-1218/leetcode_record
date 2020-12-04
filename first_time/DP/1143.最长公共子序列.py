@@ -23,5 +23,19 @@ class Solution:
                     counts[y][x] = max(counts[y-1][x], counts[y][x-1])
         return counts[-1][-1]
 
+# 公共子串
+class Solution:
+    def longestCommonSubsequence(self, text1, text2):
+        m, n= len(text1), len(text2)
+        if m==0 and n==0:
+            return 0
+        counts = [[0]*(n+1) for i in range(m+1)]
+        for y in range(1,m+1):
+            for x in range(1,n+1):
+                if text1[y-1] == text2[x-1]:
+                    counts[y][x] = counts[y-1][x-1] + 1
+                else:
+                    counts[y][x] = 0
+        return max(counts)
 # @lc code=end
 
