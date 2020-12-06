@@ -12,26 +12,22 @@
 class Solution:
     def isValid(self, s):
         stack = []
+        temp = {'(':')', '{':'}', '[':']'}
         for char in s:
-            if char in ['(', '{', '[']:
-                stack.append(char)
-            elif char in [')', '}', ']']:
+            if char in temp:
+                stack.append(temp[char])
+            else:
                 if not stack:
                     return False
-                if char == ')' and stack[-1] =='(':
-                    stack.pop()
-                elif char == '}' and stack[-1] =='{':
-                    stack.pop()
-                elif char == ']' and stack[-1] =='[':
-                    stack.pop()
-                else:
+                if stack.pop(-1) != char:
                     return False
-            else:
-                pass
-        if not stack:
-            return True
-        else:
+        if stack:
             return False
+        else:
+            return True
+
+
+            
 # @lc code=end
 
 sol = Solution()

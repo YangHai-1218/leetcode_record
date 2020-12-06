@@ -12,24 +12,16 @@
 # @lc code=start
 
 
+from collections import defaultdict    
 class Solution:
     def isAnagram(self, s, t):
-        t_freq = {}
-        s_freq = {}
+        s_freq = defaultdict(int)
+        t_freq = defaultdict(int)
         for char in s:
-            if char in s_freq:
-                s_freq[char] += 1
-            else:
-                s_freq[char] = 1
+            s_freq[char] += 1
         for char in t:
-            if char in t_freq:
-                t_freq[char] += 1
-            else:
-                t_freq[char] = 1
-        if s_freq == t_freq:
-            return True
-        else:
-            return False            
+            t_freq[char] += 1
+        return s_freq == t_freq   
 # @lc code=end
 
 sol = Solution()

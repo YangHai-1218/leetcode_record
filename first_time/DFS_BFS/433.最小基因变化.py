@@ -21,7 +21,22 @@ class Solution:
                         queue.append((new_string, step + 1))
                         bank.remove(new_string)
         return -1
-                    
+
+class Solution:
+    change_map = {'A':'CGT', 'C':'AGT', 'G':'CAT', 'T':'GAC'}
+    def minMutation(self, start, end, bank):
+        queue = [start]
+        result = 0
+        while queue:
+            current_level_size =  len(queue)
+            result += 1
+            for i in range(current_level_size):
+                current_string = queue.pop(0)   
+                if current_string == end:
+                    return result
+                for i, char in enumerate(current_string):
+                    for c in self.change_map[char]:
+                               
 # DFS version
 
         

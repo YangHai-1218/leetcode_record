@@ -36,6 +36,7 @@ class Solution:
             if time==len_nums:
                 break
 
+
 # @lc code=end
 
 sol = Solution()

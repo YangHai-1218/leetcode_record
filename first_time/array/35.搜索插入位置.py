@@ -34,7 +34,7 @@ class Solution:
         for i,num in enumerate(nums):
             if num == target:
                 return i-1
-            if num<target and target < nums[i+1]:
+            if num < target < nums[i+1]:
                 return i
         return len_
 # @lc code=end
