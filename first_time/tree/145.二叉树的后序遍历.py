@@ -12,7 +12,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def postorderTraversal(self, root: TreeNode) -> List[int]:
+    def postorderTraversal(self, root):
         self.traverse_path_list = []
         self._postorder(root)
         return self.traverse_path_list

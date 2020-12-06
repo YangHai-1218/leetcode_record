@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-			"label": "C/C++: clang++ build active file",
+			"label": "clang++ build active file",
 			"command": "/usr/bin/clang++",
 			"args": [
 				"-g",
