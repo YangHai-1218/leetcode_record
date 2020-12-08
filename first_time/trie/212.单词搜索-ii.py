@@ -5,96 +5,54 @@
 #
 
 # @lc code=start
-class Trie:
-
-    def __init__(self):
-        """
-        Initialize your data structure here.
-        """
-        self.root = {}
-
-
-    def insert(self, word):
-        """
-        Inserts a word into the trie.
-        """
-        current_node = self.root
-        for char in word:
-            if char not in current_node:
-                current_node[char] = {}
-            current_node = current_node[char]
-        current_node['#'] = '#'
-
-
-
-    def search(self, word: str) -> bool:
-        """
-        Returns if the word is in the trie.
-        """
-        current_node =  self.root
-        for char in word:
-            if char not in current_node:
-                return False
-            else:
-                current_node = current_node[char]
-        if '#' not in current_node:
-            return False
-        else:
-            return True
-
-
-
-    def startsWith(self, prefix: str) -> bool:
-        """
-        Returns if there is any word in the trie that starts with the given prefix.
-        """
-        
-        current_node = self.root
-        for char in prefix:
-            if char not in current_node:
-                return False
-            else:
-                current_node = current_node[char]
-        return True
-
 class Solution:
     def findWords(self, board, words):
         self.generate_trie(words)
         self.result = set()
+        self.board = board
         self.m, self.n = len(board), len(board[0])
         for y in range(self.m):
             for x in range(self.n):
-                self.dfs(board, x, y, "")
+                if self.board[y][x] in self.trie:
+                    self.dfs(x,y, "", self.trie)
+
         return list(self.result)
     
-    def dfs(self, board, x, y, cur_word):
-        if not self.trie.startsWith(cur_word+board[y][x]):
-            return 
-        if self.trie.search(cur_word + board[y][x]):
-            self.result.add(cur_word + board[y][x])
+    def dfs(self, x, y, cur_word, parent):
         
-        cur_word += board[y][x]
-        temp, board[y][x] = board[y][x], '@'
+        if self.board[y][x] not in parent:
+            return
+        
+        cur_word += self.board[y][x]
+        curnode = parent[self.board[y][x]]
+        if '#' in curnode:
+            self.result.add(cur_word)
+        temp, self.board[y][x] = self.board[y][x], '@'
         # left 
-        if x - 1 >= 0 and board[y][x-1] is not '@':
-            self.dfs(board, x-1, y, cur_word)
+        if x - 1 >= 0 and self.board[y][x-1] is not '@' and self.board[y][x-1] in curnode:
+            self.dfs(x-1, y, cur_word, curnode)
         # right
-        if x + 1 < self.n and board[y][x+1] is not '@':
-            self.dfs(board, x+1, y, cur_word)
+        if x + 1 < self.n and self.board[y][x+1] is not '@' and self.board[y][x+1] in curnode:
+            self.dfs(x+1, y, cur_word, curnode)
         # down
-        if y+1 < self.m and board[y+1][x] is not '@' :
-            self.dfs(board, x, y+1, cur_word)
+        if y+1 < self.m and self.board[y+1][x] is not '@' and self.board[y+1][x] in curnode:
+            self.dfs(x, y+1, cur_word, curnode)
         # up
-        if y - 1 >= 0 and board[y-1][x] is not '@':
-            self.dfs(board,  x, y-1, cur_word)
+        if y - 1 >= 0 and self.board[y-1][x] is not '@' and self.board[y-1][x] in curnode:
+            self.dfs(x, y-1, cur_word, curnode)
         
-        board[y][x] = temp
+        self.board[y][x] = temp
 
     
     def generate_trie(self, words):
-        self.trie = Trie()
+        self.trie = {}
         for word in words:
-            self.trie.insert(word)
+            current_node = self.trie
+            for char in word:
+                if char not in current_node:
+                    current_node[char] = {}
+                current_node = current_node[char]
+            current_node['#'] = '#'
 # @lc code=end
 sol = Solution()
 board = [["a","b","c"],["a","e","d"],["a","f","g"]]

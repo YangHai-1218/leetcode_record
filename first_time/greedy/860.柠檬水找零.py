@@ -30,9 +30,6 @@ class Solution:
             else:
                 pass
         return True
-                
-                
-            
 
         
 # @lc code=end
