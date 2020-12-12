@@ -17,7 +17,6 @@ class Solution:
         stack = []
         for char in s:
             if char == ']':
-                
                 chars = []
                 while stack[-1] != '[':
                     chars.append(stack.pop())
