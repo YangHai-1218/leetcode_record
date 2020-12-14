@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Applications/anaconda3/bin/python",
+    "python.pythonPath": "/Applications/anaconda3/envs/torch/bin/python",
     "cmake.configureOnOpen": false,
     "files.associations": {
         "array": "cpp",

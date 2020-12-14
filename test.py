@@ -1,49 +1,10 @@
 
-
-
-
-
-class Solution:
-    def rotate_martix(self, matrix):
-        if not matrix:
-            return []
-        result = []
-        num_row = len(matrix)
-        for i in range(num_row):
-            col = [matrix[j][i] for j in range(num_row-1, -1, -1)]
-            result.append(col)
-        return result
-    def rotate_martix_inplace(self, matrix):
-        if not matrix:
-            return []
-
-class Solution2:
-    def carry_people(self, people, limit):
-        people.sort()
-        num_ = len(people)
-        start_index = 0
-        end_index = num_ - 1
-        result = 0
-        # people.insert(num_, 0)
-        while start_index < end_index:
-            current_weigth = people[start_index]
-            min_weight = people[end_index]
-            if current_weigth + min_weight <= limit:
-                result += 1
-                start_index += 1
-                end_index -= 1
-            else:
-                result += 1
-                start_index += 1
-        return result
-
-
-
-if __name__ =='__main__':
-    # martix = [[1,2],[3,4]]
-    # sol = Solution()
-    # print(sol.rotate_martix(martix))
-    people = [1,2,3,4]
-    limit = 5
-    sol = Solution2()
-    print(sol.carry_people(people, limit))
+import torch
+from torch.nn import Conv2d
+import time
+image = torch.randn((1,3,224,224))
+conv2d = Conv2d(in_channels=3, out_channels=32, kernel_size=3)
+start = time.perf_counter()
+output = conv2d(image)
+end = time.perf_counter()
+print('Running time: %s Seconds'%(end-start))
