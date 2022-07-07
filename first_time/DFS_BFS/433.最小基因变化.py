@@ -22,6 +22,7 @@ class Solution:
                         bank.remove(new_string)
         return -1
 
+# BFS version
 class Solution:
     change_map = {'A':'CGT', 'C':'AGT', 'G':'CAT', 'T':'GAC'}
     def minMutation(self, start, end, bank):

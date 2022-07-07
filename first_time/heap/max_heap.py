@@ -1,73 +1,62 @@
 import heapq
 
 class MaxHeap:
-    def __init__(self, max_size):
-        self.max_size = max_size
-        self.heap = [0] * (max_size+1)
+    def __init__(self, maxsize):
+        self.maxsize = maxsize
         self.Front = 1
+        self.heap = [0] * maxsize
+        self.heap[0] = 10000000
         self.size = 0
-        self.heap[self.Front-1] = 1000000000
     
 
-    def get_left_child(self, pos):
-        return pos * 2
+    def get_left_chid(self, pos):
+        return 2 * pos
     
     def get_right_child(self, pos):
-        return pos * 2 + 1
+        return 2 * pos + 1
     
     def get_parent_node(self, pos):
-        return int(pos // 2)
+        return int(pos//2)
     
-
     def is_leaf(self, pos):
-        if 2 * pos > self.size and pos <= self.size:
+        if pos * 2 > self.size:
             return True
         return False
-
-
-    def swap(self, pos, spos):
-        self.heap[pos], self.heap[spos] = self.heap[spos], self.heap[pos]
-        
-
-
+    
     def max_heapify(self, pos):
         if not self.is_leaf(pos):
-            left_child_index = self.get_left_child(pos)
-            right_child_index = self.get_right_child(pos)
-            if self.heap[pos] < self.heap[left_child_index] or \
-                self.heap[pos] < self.heap[right_child_index]:
-                if self.heap[left_child_index] > self.heap[right_child_index]:
-                    self.swap(pos, left_child_index)
-                    self.max_heapify(left_child_index)
+            left_child_pos = self.get_left_chid(pos)
+            right_child_pos = self.get_right_child(pos)
+            if self.heap[pos] < self.heap[left_child_pos] or \
+                self.heap[pos] < self.heap[right_child_pos]:
+                if self.heap[left_child_pos] > self.heap[right_child_pos]:
+                    self.heap[pos], self.heap[left_child_pos] = self.heap[left_child_pos], self.heap[pos]
+                    self.max_heapify(left_child_pos)
                 else:
-                    self.swap(pos, right_child_index)
-                    self.max_heapify(right_child_index)
-
+                    self.heap[pos], self.heap[right_child_pos] = self.heap[right_child_pos], self.heap[pos]
+                    self.max_heapify(right_child_pos)
     
-
-    def insert(self, value):
-        if self.size > self.max_size:
-            return
-        
+    def insert(self, val):
         self.size += 1
-        self.heap[self.size] = value
+        self.heap[self.size] = val
+        curr = self.size
+        while self.heap[self.get_parent_node(curr)] < self.heap[curr]:
+            self.heap[curr], self.heap[self.get_parent_node(curr)] = self.heap[self.get_parent_node(curr)], self.heap[curr]
+            curr = self.get_parent_node(curr)
 
-        current = self.size
-        while self.heap[current] > self.heap[self.get_parent_node(current)]:
-            self.swap(current, self.get_parent_node(current))
-            current = self.get_parent_node(current)
-    
 
-    def get_max(self):
-        return self.heap[self.Front]
-    
+        
 
-    def extractMax(self):
-        poped = self.heap[self.Front]
-        self.heap[self.Front] = self.heap[self.size]
+
+    def extractmax(self):
+        popped = self.heap[self.Front]
+        self.heap[self.Front], self.heap[self.size] = self.heap[self.size], self.heap[self.Front]
         self.size -= 1
         self.max_heapify(self.Front)
-        return poped
+        return popped
+
+
+
     
 
 def test():

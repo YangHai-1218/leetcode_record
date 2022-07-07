@@ -12,13 +12,14 @@ class QuickSort:
         return nums
     
     def partition(self, nums, begin ,end):
-        pivot, counter = end, begin
+        pivot, pointer = end, begin
         for i in range(begin, end):
             if nums[i] < nums[pivot]:
-                nums[counter], nums[i] = nums[i], nums[counter]
-                counter += 1
-        nums[counter], nums[pivot] = nums[pivot], nums[counter]
-        return counter
+                nums[pointer], nums[i] = nums[i], nums[pointer]
+                pointer += 1
+        nums[pointer], nums[pivot] = nums[pivot], nums[pointer]
+        # pointer point to value > pivot
+        return pointer
 
 class MergeSort:
     def __call__(self, nums):

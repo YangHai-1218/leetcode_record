@@ -6,6 +6,8 @@
 
 # @lc code=start
 from collections import defaultdict
+import math
+# 点斜式
 class Solution:
     
     def get_gcd(self, num, den):
