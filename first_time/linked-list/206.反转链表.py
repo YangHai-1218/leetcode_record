@@ -5,7 +5,7 @@
 #
 
 # @lc code=start
-# Definition for singly-linked list.
+# Definition for single-linked list.
 class ListNode:
     def __init__(self, x):
         self.val = x
@@ -17,7 +17,7 @@ class Solution:
             return head
         if head.next is None:
             return head
-        prev, cur = head,None
+        prev, cur = head, None
         while True:
             cur = head.next
             head.next = cur.next

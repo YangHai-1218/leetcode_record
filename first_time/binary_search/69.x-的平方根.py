@@ -5,24 +5,22 @@
 #
 
 # @lc code=start
-# class Solution:
-#     def mySqrt(self, x):
-#         if x == 0:
-#             return 0
-#         left, right = 1, x
-#         result = -1
-#         while left <= right:
-#             mid = int(left + (right - left) / 2)
-#             if mid**2 == x:
-#                 return mid
-#             elif mid ** 2 >x:
-#                 right = mid - 1
-#             else:
-#                 result = mid
-#                 left = mid + 1
-#         return result
+class Solution:
+    def mySqrt(self, x):
+        left, right = 0, x 
+        while left <= right:
+            mid = (left + right) // 2
+            if mid ** 2 < x:
+                left = mid + 1
+            elif mid ** 2 > x:
+                right = mid - 1
+            else:
+                return mid 
+        return right
+        
 
 # Newton version
+# https://www.cnblogs.com/Allen-rg/p/13602550.html
 # class Solution:
 #     def mySqrt(self, x):
 #         if x == 0:
@@ -39,28 +37,23 @@
 # sol = Solution()
 # print(sol.mySqrt(8))
 
-class Solution:
+# class Solution:
 
-    def Power(self, base, n):
-        if base==0:
-            return 0
-        if n==0:
-            return 1
-        left, right = 1, float('inf')
-        result = 1
-        while left <= right:
-            mid = ((left+ right)/2)
-            if mid**(1/n) == base:
-                return mid
-            elif mid^(1/n) > left:
-                result = mid
-                left = mid + 1
-            else:
-                right = mid - 1
-        return result
-    
-
-
-sol = Solution()
-print(sol.Power(3, 2))
+#     def Power(self, base, n):
+#         if base==0:
+#             return 0
+#         if n==0:
+#             return 1
+#         left, right = 1, float('inf')
+#         result = 1
+#         while left <= right:
+#             mid = ((left+ right)/2)
+#             if mid**(1/n) == base:
+#                 return mid
+#             elif mid^(1/n) > left:
+#                 result = mid
+#                 left = mid + 1
+#             else:
+#                 right = mid - 1
+#         return result
 
