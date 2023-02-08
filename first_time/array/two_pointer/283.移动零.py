@@ -18,13 +18,18 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        j=0
-        for i, num in enumerate(nums):
-            if num !=0 :
-                nums[j] = num
-                if i!=j:
-                    nums[i] = 0
-                j += 1
+        n = len(nums)
+        slow_pointer, fast_pointer = 0,0 
+        while fast_pointer < n:
+            if nums[fast_pointer] != 0:
+                nums[slow_pointer] = nums[fast_pointer]
+                slow_pointer += 1
+            fast_pointer += 1
+        if slow_pointer < n:
+            nums[slow_pointer:] = [0 for _ in range(n - slow_pointer)]
+    
+            
+
 
 # swap 
 # @lc code=end
