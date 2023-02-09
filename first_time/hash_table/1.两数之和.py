@@ -17,9 +17,9 @@ class Solution:
     def twoSum(self, nums, target):
         temp = {}
         for i, num in enumerate(nums):
-            if num in temp:
-                return [i, temp[num]]
-            temp[target-num] = i
+            if target - num in temp:
+                return [temp[target-num], i]
+            temp[num] = i
         return None
 # @lc code=end
 

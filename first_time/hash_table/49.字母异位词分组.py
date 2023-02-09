@@ -14,14 +14,11 @@ class Solution:
     def groupAnagrams(self, strs):
         if not strs:
             return []
-        chars = {}
-        for i,char in enumerate('abcdefghijklmnopqrstuvwxyz'):
-            chars[char] = i
         res = collections.defaultdict(list)
         for str_ in strs:
-            count = [0 for i in range(26)]
-            for char in str_:
-                count[chars[char]] += 1
+            count = [0 for _ in range(26)]
+            for c in str_:
+                count[ord(c) - ord('a')] += 1
             res[tuple(count)].append(str_)
         return list(res.values())
 # @lc code=end
