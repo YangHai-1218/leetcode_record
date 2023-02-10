@@ -11,25 +11,32 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
+# class Solution:
+#     def __init__(self):
+#         self.traverse_path_list = []
+#     def inorder(self, root):
+#         if not root:
+#             return
+#         self.inorder(root.left)
+#         self.traverse_path_list.append(root.val)
+#         self.inorder(root.right) 
+#     def inorderTraversal(self,root):
+#         self.inorder(root)
+#         return self.traverse_path_list
+
 class Solution:
-    def __init__(self):
-        self.traverse_path_list = []
-    def inorder(self, root):
-        if not root:
-            return
-        self.inorder(root.left)
-        self.traverse_path_list.append(root.val)
-        self.inorder(root.right) 
     def inorderTraversal(self,root):
-        self.inorder(root)
-        return self.traverse_path_list
+        stack, ans = [], []
+        cur = root
+        while cur is not None or len(stack) > 0:
+            if cur is not None:
+                stack.append(cur)
+                cur = cur.left
+            else:
+                cur = stack.pop()
+                ans.append(cur.val)
+                cur = cur.right
+        return ans 
+
 # @lc code=end
 
-root = TreeNode(val=1)
-right = TreeNode(val=2)
-left = TreeNode(val=3)
-root.right = right
-right.left = left
-
-sol = Solution()
-sol.inorderTraversal(root)

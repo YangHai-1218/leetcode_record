@@ -14,23 +14,19 @@
 
 class Solution:
     def rightSideView(self, root):
-        if root is None:
-            return []
-        self.ans = []
-        queue = [root]
+        queue, ans = [root], []
         while queue:
-            current_level_size = len(queue)
-            for i in range(current_level_size):
-                if i == current_level_size - 1:
-                    node = queue.pop(0)
-                    self.ans.append(node.val)
-                else:
-                    node = queue.pop(0)
-                if node.left is not None:
-                    queue.append(node.left)
-                if node.right is not None:
-                    queue.append(node.right)
-        return self.ans
+            size = len(queue)
+            cur_level_rec = []
+            for _ in range(size):
+                cur_node = queue.pop(0)
+                if cur_node is not None: 
+                    cur_level_rec.append(cur_node.val)
+                    queue.append(cur_node.left)
+                    queue.append(cur_node.right)
+            if len(cur_level_rec) > 0:
+                ans.append(cur_level_rec[-1])
+        return ans
 
     
 

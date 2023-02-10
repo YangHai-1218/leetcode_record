@@ -11,17 +11,30 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+# class Solution:
+#     def postorderTraversal(self, root):
+#         self.traverse_path_list = []
+#         self._postorder(root)
+#         return self.traverse_path_list
+#     def _postorder(self, node):
+#         if not node:
+#             return
+#         self._postorder(node.left)
+#         self._postorder(node.right)
+#         self.traverse_path_list.append(node.val)
+
 class Solution:
     def postorderTraversal(self, root):
-        self.traverse_path_list = []
-        self._postorder(root)
-        return self.traverse_path_list
-    def _postorder(self, node):
-        if not node:
-            return
-        self._postorder(node.left)
-        self._postorder(node.right)
-        self.traverse_path_list.append(node.val)
-        
+        ans, stack = [], []
+        stack.append(root)
+        while stack:
+            cur = stack.pop()
+            if cur is not None:
+                ans.append(cur.val)
+            else:
+                continue
+            stack.append(cur.left)
+            stack.append(cur.right)
+        return ans[::-1]     
 # @lc code=end
 
