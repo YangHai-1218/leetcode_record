@@ -30,9 +30,9 @@ class Solution:
                 if right < len(nums)-1 and nums[right] == nums[right+1]:
                     right -= 1
                     continue
-                if nums[left] + nums[right] > -nums[i]:
+                if nums[left] + nums[right] + nums[i] > 0:
                     right -= 1
-                elif nums[left] + nums[right] < -nums[i]:
+                elif nums[left] + nums[right] + nums[i] < 0:
                     left += 1
                 else:
                     res.append([nums[i], nums[left], nums[right]])

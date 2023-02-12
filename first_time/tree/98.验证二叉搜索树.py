@@ -14,20 +14,42 @@ class TreeNode:
 class Solution:
     def isValidBST(self, root: TreeNode) -> bool:
         if root is None:
-            return False
-        self.prev_node_val = float('-inf')
-        return self._isvalidbst(root)
-
-    def _isvalidbst(self, node):
-        if not node:
             return True
-        if not self._isvalidbst(node.left):
+        if root.left is None or root.right is None:
+            return True
+        leftmaxval, leftminval = self.getmaxmin(root.left)
+        if leftmaxval is False or leftminval is False:
             return False
+        rightmaxval, rightminval = self.getmaxmin(root.right)
+        if rightmaxval is False or rightminval is False:
+            return False 
+        if root.val > leftmaxval and root.val < rightminval:
+            return True
+        else:
+            return False
+    
+
+    def getmaxmin(self, node):
+        if node.left is None and node.right is None:
+            return node.val, node.val
         
-        if node.val <= self.prev_node_val:
-            return False
-        self.prev_node_val = node.val
-        return self._isvalidbst(node.right)
+        
+        if node.left is not None:
+            leftmaxval, leftminval = self.getmaxmin(node.left)
+            if leftmaxval is False and leftminval is False:
+                return False
+        
+        if node.right is not None:
+            rightmaxval, rightminval = self.getmaxmin(node.right)
+            if rightminval is False and rightmaxval is False:
+                return False
+
+        
+        if leftmaxval < node.val and rightminval > node.val:
+            return max(leftmaxval, rightmaxval), min(leftminval, rightminval)
+        else:
+            return False, False
+
         
 
 # @lc code=end
