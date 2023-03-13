@@ -5,6 +5,7 @@
 #
 
 # @lc code=start
+
 class Solution:
     number_to_char_map = {'2':['a','b','c'], 
                             '3':['d','e','f'],
@@ -14,20 +15,26 @@ class Solution:
                             '7':['p','q','r','s'],
                             '8':['t','u','v'],
                             '9':['w','x','y','z']}
+    
+    def __init__(self) -> None:
+        self.result = []
     def letterCombinations(self, digits) :
         if len(digits) == 0:
             return []
-        if len(digits) == 1:
-            return self.number_to_char_map[digits[0]]
+        self.backtrack([], digits, 0)
+        return self.result
+
+    def backtrack(self, path, digits, start_index):
+        if len(path) == len(digits):
+            self.result.append(''.join(path.copy()))
+            return 
         
-        current_digit = digits[-1]
-        result = self.letterCombinations(digits[:-1])
-        current_char = self.number_to_char_map[current_digit]
-        result_ = result.copy()
-        result = []
-        for char in current_char:
-            result += [l+char for l in result_]
-        return result
+        chars = self.number_to_char_map[digits[start_index]]
+        for c in chars:
+            path.append(c)
+            self.backtrack(path, digits, start_index+1)
+            path.pop(-1)
+
 
 # @lc code=end
 

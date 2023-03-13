@@ -3,7 +3,7 @@
 #
 # [111] 二叉树的最小深度
 #
-
+from typing import Optional
 # @lc code=start
 # Definition for a binary tree node.
 # class TreeNode:
