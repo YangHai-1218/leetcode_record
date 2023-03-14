@@ -6,11 +6,11 @@
 from typing import Optional
 # @lc code=start
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
 class Solution:
     def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
         leftleaves = []
@@ -27,7 +27,5 @@ class Solution:
         if node.right is not None:
             self.getsumofleftleaves(node.right, leftleave, 0)
         
-            
-
 # @lc code=end
 

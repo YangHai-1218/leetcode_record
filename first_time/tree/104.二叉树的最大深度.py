@@ -49,11 +49,13 @@ class TreeNode:
 class Solution:
     def __init__(self) -> None:
         self.result = 0
+    
     def maxDepth(self, root:Optional[TreeNode]) -> int:
         if root is None:
             return 0
         self.getdepth(root, 1)
         return self.result
+    
     def getdepth(self, node:TreeNode, depth:int):
         self.result = depth if self.result < depth else self.result
         if node.left is None and node.right is None:

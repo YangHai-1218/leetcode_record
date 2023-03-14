@@ -13,18 +13,18 @@ from typing import List, Optional
 #         self.right = right
 class Solution:
     def constructMaximumBinaryTree(self, nums: List[int]) -> Optional[TreeNode]:
-        root = self.construct(nums)
+        root = self.construct(nums, 0, len(nums)-1)
         print(root)
         return root
 
-    def construct(self, nums):
-        if len(nums) == 0:
+    def construct(self, nums, left, right):
+        if left > right:
             return None
-        maxindex = [i for i, n in enumerate(nums) if n==max(nums)][0]
+        nums_ = nums[left:right+1]
+        maxindex = [i for i, n in enumerate(nums_) if n == max(nums_)][0] + left
         node = TreeNode(val=nums[maxindex])
-        node.left = self.construct(nums[:maxindex])
-        if maxindex < len(nums) - 1:
-            node.right = self.construct(nums[maxindex+1:])
+        node.left = self.construct(nums, left, maxindex-1)
+        node.right = self.construct(nums, maxindex+1, right)
         return node
 
 # @lc code=end
