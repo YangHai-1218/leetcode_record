@@ -15,6 +15,7 @@ class Solution:
             return 0
         m, n = len(obstacleGrid), len(obstacleGrid[0])
         dp = [[0 for _ in range(n)] for _ in range(m)]
+
         # initialize
         dp[0][0] = 1
         for i in range(1, n):
@@ -22,7 +23,6 @@ class Solution:
                 dp[0][i] = 0
             else:
                 dp[0][i] = dp[0][i-1]
-        
         for i in range(1, m):
             if obstacleGrid[i-1][0] == 1:
                 dp[i][0] = 0

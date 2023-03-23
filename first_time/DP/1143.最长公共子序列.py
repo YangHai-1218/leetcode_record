@@ -3,39 +3,20 @@
 #
 # [1143] 最长公共子序列
 #
-# [x] first time 20-12-01: read other solutions and code by yourself
-# [x] second time 20-12-01: select the best solution and use cpp to implement it
-# [] third time 20-12-01: after 24 hours
-# [] forth time 20-12-01: after a week
-# [] fifth time 20-12-01: before interview
+
 # @lc code=start
 class Solution:
-    def longestCommonSubsequence(self, text1, text2):
-        m, n= len(text1), len(text2)
-        if m==0 and n==0:
-            return 0
-        counts = [[0]*(n+1) for i in range(m+1)]
-        for y in range(1,m+1):
-            for x in range(1,n+1):
-                if text1[y-1] == text2[x-1]:
-                    counts[y][x] = counts[y-1][x-1] + 1
+    def longestCommonSubsequence(self, s: str, t: str) -> int:
+        len_s, len_t = len(s), len(t)
+        dp = [[0]*(len_s+1) for _ in range(len_t+1)]
+        for i in range(1, len_s+1):
+            for j in range(1, len_t+1):
+                if t[j-1] == s[i-1]:
+                    dp[j][i] = dp[j-1][i-1] + 1
                 else:
-                    counts[y][x] = max(counts[y-1][x], counts[y][x-1])
-        return counts[-1][-1]
-
-# 公共子串
-class Solution:
-    def longestCommonSubsequence(self, text1, text2):
-        m, n= len(text1), len(text2)
-        if m==0 and n==0:
-            return 0
-        counts = [[0]*(n+1) for i in range(m+1)]
-        for y in range(1,m+1):
-            for x in range(1,n+1):
-                if text1[y-1] == text2[x-1]:
-                    counts[y][x] = counts[y-1][x-1] + 1
-                else:
-                    counts[y][x] = 0
-        return max(counts)
+                    dp[j][i] = max(dp[j][i-1], dp[j-1][i])
+        return dp[-1][-1]
+        
 # @lc code=end
-
+sol = Solution()
+print(sol.longestCommonSubsequence("abcde", "abc"))

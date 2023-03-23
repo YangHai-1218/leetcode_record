@@ -13,13 +13,16 @@ class Solution:
     def rob(self, nums):
         if not nums:
             return 0
-        if len(nums) <= 2:
-            return max(nums)
-        steal_money = [0] * (len(nums)+1)
-        steal_money[1], steal_money[2] = nums[0], nums[1]
-        for i in range(3, len(nums)+1):
-            steal_money[i] = max(steal_money[i-2], steal_money[i-3]) + nums[i-1]
-        return max(steal_money[-1], steal_money[-2])
+        if len(nums) == 1:
+            return nums[0]
+        elif len(nums) == 2:
+            return max(nums[0], nums[1])
+        dp = [0 for _ in range(len(nums))]
+        dp[0] = nums[0]
+        dp[1] = max(nums[0], nums[1])
+        for i in range(2, len(nums)):
+            dp[i] = max(dp[i-2]+nums[i], dp[i-1])
+        return dp[-1]
         
 # @lc code=end
 
