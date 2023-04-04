@@ -15,7 +15,6 @@ class Solution:
     def insertIntoBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
         if root is None:
             return TreeNode(val=val)
-            root.val = val
         self._insert(root, val)
         return root
     
