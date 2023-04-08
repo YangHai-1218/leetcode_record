@@ -30,13 +30,7 @@ class Solution:
         sum_nums = sum(nums)
         if sum_nums % 2 != 0:
             return False
-        dp = [0 for _ in range(sum_nums//2+1)]
-        for i in range(len(nums)):
-            for j in range(sum_nums//2, -1, -1):
-                if j < nums[i]:
-                    continue
-                dp[j] = max(dp[j], dp[j-nums[i]]+nums[i])
-        return dp[-1] == sum_nums//2
+        
 # @lc code=end
 Solution().canPartition([1,5,11,5])
 
