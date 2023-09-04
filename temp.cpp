@@ -65,36 +65,39 @@
 
 #include <iostream>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
-const int maxn = 100005;
-int s[maxn], t[maxn], cnt[maxn];
 
-int main() {
-    int n;
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        cin >> s[i];
-    }
-    for (int i = 0; i < n; i++) {
-        cin >> t[i];
-    }
-    int maxt = 0;
-    for (int i = 0; i < n; i++) {
-        for (int j = s[i]; j <= t[i]; j++) {
-            cnt[j]++;
-            maxt = max(maxt, cnt[j]);
+
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> results;
+        for(int i=0; i<nums.size()-3;i++){
+            int left = i+1,  right = nums.size()-1;
+            while(left < right){
+                if(nums[left] + nums[right] + nums[i] > 0){
+                    right --;
+                }else if(nums[left] + nums[right] + nums[i] < 0){
+                    left ++;
+                }else{
+                    vector<int> result;
+                    result.push_back(left);
+                    result.push_back(right);
+                    result.push_back(i);
+                    results.push_back(result);
+                    break;
+                }
+            }
         }
+        return results;
     }
-    int ans = 0, ansCnt = 0;
-    for (int i = 0; i < n; i++) {
-        ans = max(ans, maxt);
-    }
-    for (auto num : cnt){
-        if (num == ans){
-            ansCnt++;
-        }
-    }
-    cout << ans << " " << ansCnt << endl;
+};
+
+
+int main(){
     return 0;
 }
+

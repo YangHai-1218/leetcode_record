@@ -52,6 +52,32 @@ def nms(bboxes:np.ndarray, scores:np.ndarray, labels:np.ndarray, threshold):
                 suppressed[index_j] = True
     
     return ~suppressed
+
+def nms_parrallel(bboxes:np.ndarray, scores:np.ndarray, nms_threshold:float):
+    sorted_inds = np.argsort(scores)[...-1]
+    keep = []
+    x1, y1, x2, y2 = bboxes[:, 0], bboxes[:, 1], bboxes[:, 2], bboxes[:, 3]
+    area = (x2 - x1 + 1) * (y2 - y1 + 1)
+
+    while len(sorted_inds) > 0:
+        index_i = sorted_inds[0]
+        keep.append(index_i)
+
+        xx1 = np.maximum(x1[index_i], x1[sorted_inds[1:]])
+        yy1 = np.maximum(y1[index_i], y1[sorted_inds[1:]])
+        xx2 = np.minimum(x2[index_i], x2[sorted_inds[1:]])
+        yy2 = np.minimum(y2[index_i], y2[sorted_inds[1:]])
+
+        union = np.maximum(0, xx2 - xx1 + 1) * np.maximum(0, yy2 - yy1 + 1)
+        iou = union / (area[index_i] + area[sorted_inds[1:]] - union)
+        inds = iou < nms_threshold
+        sorted_inds = sorted_inds[inds+1]
+    
+    return bboxes[keep]
+    
+        
+
+
             
 
 def conv(input, kernel, stride=1, padding=1):

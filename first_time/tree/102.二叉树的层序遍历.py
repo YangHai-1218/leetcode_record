@@ -35,7 +35,7 @@ class Solution:
 #     def levelOrder(self, root):
 #         queue, ans = [root, ], []
 #         while queue:
-#             size = len(queue)
+#             size = lehttps://assets.leetcode.com/uploads/2021/02/19/tree1.jpgn(queue)
 #             ans_cur_level = []
 #             for _ in range(size):
 #                 cur_node = queue.pop(0)
