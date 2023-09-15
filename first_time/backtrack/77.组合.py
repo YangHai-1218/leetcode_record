@@ -22,5 +22,5 @@ class Solution:
             self.backtracking(path, n, k, i+1)
             path.pop(-1)
 # @lc code=end
-print(Solution().combine(4, 3))
+print(Solution().combine(3, 3))
 
